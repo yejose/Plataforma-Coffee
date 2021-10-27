@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>App 4</title>
+    <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/assets/css/FontAwesome.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik&amp;display=swap">
+    <link rel="stylesheet" href="../static/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/assets/css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md border rounded-0 shadow-sm" style="font-weight: bold;background: 880E4F;">
+        <div class="container-fluid"><a class="navbar-brand" href="baselog.html" style="margin: auto;">Home</a></div>
+    </nav>
+    <div class="container d-xl-flex justify-content-xl-center" style="margin-top: 36px;padding-bottom: 12px;padding-top: 12px;margin-bottom: 16px;">
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 30px;background: #ffffff;margin-top: 12px;min-width: 50%;">
+            <h4 style="margin-left: 8px;margin-top: 8px;margin-right: 8px;text-align: center;margin-bottom: 24px;">Inicia sesión</h4>
+            <form id="login_form" method="post" style="margin: 12px;margin-left: 16px;margin-top: 16px;" action="/login">
+                <div class="mb-3"><input class="form-control" type="text" id="login_uEmail" name="login_uEmail" placeholder="Email" style="font-size: 14px;">
+                    <p id="error_login_uEmail" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">{{ error_login_uEmail }}</p>
+                </div>
+                <div class="mb-3"><input class="form-control" type="text" id="login_uPassword" name="login_uPassword" placeholder="Contraseña" style="font-size: 14px;color: rgb(33, 37, 41);">
+                    <p id="error_login_uPassword" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">{{ error_login_uPassword }}</p>
+                </div>
+                <button class="btn btn-primary" id="login_users" type="submit" style="margin-left: 0px;margin-bottom: 16px;margin-top: 8px;margin-right: 16px;">Iniciar</button><a href="#">
+                    <p id="signup_link-3" style="font-size: 12px;color: rgba(33,37,41,0.63);margin-bottom: 4px;max-width: 100%;margin-left: 8px;">¿Olvidaste tu contraseña?</p>
+                </a><a href="#">
+                    <a href="{{ url_for('signup') }}" id="signup_link" style="font-size: 12px;color: var(--bs-teal);margin-bottom: 4px;max-width: 100%;margin-left: 8px;">Si no tienes usuario, regístrate.</a>
+                </a>
+            </form>
+        </div>
+    </div>
+    <script src="../static/assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

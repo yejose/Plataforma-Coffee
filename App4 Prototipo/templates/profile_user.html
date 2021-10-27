@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>App 4</title>
+    <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/assets/css/FontAwesome.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik&amp;display=swap">
+    <link rel="stylesheet" href="../static/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/assets/css/styles.css">
+</head>
+
+<body style="background: var(--bs-light);">
+    <nav class="navbar navbar-light navbar-expand-md border rounded-0 shadow-sm" style="font-weight: bold;background: #ffffff;">
+        <div class="container-fluid"><a class="navbar-brand" href="{{ url_for('home') }}">Home</a><input class="border rounded-0 small bg-light form-control" type="search" placeholder="Buscar..." style="transform: translateX(0px);width: 50%;"><button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse d-md-flex d-lg-flex d-xl-flex justify-content-md-end justify-content-lg-end justify-content-xl-end" id="navcol">
+                <ul class="navbar-nav d-xl-flex">
+                    <li class="nav-item"><a class="nav-link" href="car_user.html" style="color: rgba(0, 0, 0, 0.55);">Carrito</a></li>
+                    <li class="nav-item">
+                        <div class="nav-item dropdown"><a class="dropdown-toggle d-xxl-flex justify-content-xxl-center align-items-xxl-center nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">{{ upgrade_uName }}</a>
+                            <div class="dropdown-menu" style="transform: translateX(-5px) translateY(8px);">
+                                <a class="dropdown-item" href="{{ url_for('profile') }}">Perfil</a>
+                                <a class="dropdown-item" href="{{ url_for('wish') }}">Lista de deseos</a>
+                                <a class="dropdown-item" href="{{ url_for('billing') }}">Compras</a>
+                                <a class="dropdown-item" href="{{ url_for('comments_user') }}">Comentarios</a>
+                                <div style="background: rgba(137,137,137,0.25);border-style: none;height: 2px;width: 80%;margin-left: 16px;margin-top: 8px;margin-bottom: 8px;">
+
+                                </div>
+                                <a class="dropdown-item" href="{{ url_for('login') }}">Cerrar sesión</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="max-width: 70%;margin-top: 36px;padding-bottom: 12px;padding-top: 12px;margin-bottom: 16px;">
+        <div style="margin: 8px;padding: 4px;">
+            <h4 style="margin-left: 8px;margin-top: 8px;margin-right: 8px;">Perfil de usuario</h4>
+        </div>
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 4px;background: #ffffff;margin-top: 12px;">
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;color: rgb(33, 37, 41);">Actualizar perfil</h6>
+            <form id="upgrade_form" method="post" style="margin: 12px;max-width: 40%;margin-left: 16px;margin-top: 16px;min-width: 150px;" action="/profile">
+                <div class="mb-3">
+                    <p style="font-size: 14px;margin-bottom: 4px;max-width: 100%;margin-left: 8px;color: rgba(33,37,41,0.7);">correo</p>
+                    <input class="form-control" type="text" id="upgrade_uEmail" name="upgrade_uEmail" style="font-size: 14px;" readonly="" value="{{ upgrade_uEmail  }}">
+                </div>
+                <div class="mb-3">
+                    <p style="font-size: 14px;margin-bottom: 4px;max-width: 100%;margin-left: 8px;color: rgba(33,37,41,0.7);">Nombre</p>
+                    <input class="form-control" type="text" id="upgrade_uName" name="upgrade_uName" style="font-size: 14px;" value="{{ upgrade_uName  }}">
+                    <p id="error_upgrade_uName" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;"></p>
+                </div>
+                <div class="mb-3">
+                    <p style="font-size: 14px;margin-bottom: 4px;max-width: 100%;margin-left: 8px;color: rgba(33,37,41,0.7);">Apellido</p>
+                    <input class="form-control" type="text" id="upgrade_uLastname" name="upgrade_uLastname" style="font-size: 14px;" value="{{ upgrade_uLastname  }}">
+                    <p id="error_upgrade_uLastname" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;"></p>
+                </div>
+                <div class="mb-3">
+                    <p style="font-size: 14px;margin-bottom: 4px;max-width: 100%;margin-left: 8px;color: rgba(33,37,41,0.7);">Celular</p>
+                    <input class="form-control" type="text" id="upgrade_uPhone" name="upgrade_uPhone" style="font-size: 14px;" value="{{ upgrade_uPhone  }}">
+                    <p id="error_upgrade_uPhone" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;"></p>
+                </div>
+                <button onclick="validar_Profile()" class="btn btn-primary" id="upgrade_users" type="button" style="margin-bottom: 16px;margin-top: 8px;margin-right: 16px;">Actualizar</button>
+                <p id="confirmation_upgrade" style="font-size: 12px;color: var(--bs-teal);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">{{ confirmation_upgrade }}</p>
+            </form>
+        </div>
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 4px;background: #ffffff;margin-top: 12px;">
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;color: rgb(33, 37, 41);">Actualizar contraseña</h6>
+            <form id="upgrade_form1" method="post" style="margin: 12px;max-width: 40%;margin-left: 16px;margin-top: 16px;min-width: 150px;" action="/profile">
+                <div class="mb-3">
+                    <p style="font-size: 14px;margin-bottom: 4px;max-width: 100%;margin-left: 8px;color: rgba(33,37,41,0.7);">correo</p>
+                    <input class="form-control" type="text" id="upgrade_uEmail" name="upgrade_uEmail" style="font-size: 14px;" readonly="" value="{{ upgrade_uEmail  }}">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="text" id="upgrade_uPass" name="upgrade_uPass" placeholder="Contraseña actual" style="font-size: 14px;color: rgb(33, 37, 41);">
+                    <p id="error_upgrade_uPass1" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">{{ error_upgrade_uPass1 }}</p>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="text" id="upgrade_uNewpass" name="upgrade_uNewpass" placeholder="Contraseña nueva" style="font-size: 14px;color: rgb(33, 37, 41);">
+                    <p id="error_upgrade_uNewpass" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;"></p>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="text" id="upgrade_uNewpass2" name="upgrade_uPass2" placeholder="Repite la contraseña nueva" style="font-size: 14px;color: rgb(33, 37, 41);">
+                    <p id="error_upgrade_uNewPass2" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;"></p>
+                </div>
+                <button onclick="validar_NuevaContraseña()" class="btn btn-primary" id="upgrade_pass" type="button" style="margin-bottom: 16px;margin-top: 8px;margin-right: 16px;">Actualizar</button>
+                <p id="confirmation_upgrade" style="font-size: 12px;color: var(--bs-teal);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">{{ confirmation_password }}</p>
+            </form>
+        </div>
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 4px;background: #ffffff;margin-top: 12px;">
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;color: rgb(33, 37, 41);">Eliminar perfil</h6>
+            <form id="delete_form" method="post" style="margin: 12px;max-width: 40%;margin-left: 16px;margin-top: 16px;min-width: 150px;" action="/profile">
+                
+                <button class="btn btn-primary" id="delete_users" type="submit" style="margin-top: 8px;margin-bottom: 16px;margin-right: 16px;background: var(--bs-red);border-style: none;">Eliminar</button>
+                <p id="confirmation_delete" style="font-size: 12px;color: var(--bs-teal);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">{{ confirmation_delete }}</p>
+            </form>
+        </div>
+    </div>
+    <script src="../static/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/assets/js/validarContraseña.js"></script>
+</body>
+
+</html>

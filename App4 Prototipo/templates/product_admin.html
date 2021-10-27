@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>App 4</title>
+    <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/assets/css/FontAwesome.css">
+    <link rel="stylesheet" href="../static/https://fonts.googleapis.com/css?family=Open+Sans&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik&amp;display=swap">
+    <link rel="stylesheet" href="../static/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/assets/css/styles.css">
+</head>
+
+<body style="background: var(--bs-light);">
+    <nav class="navbar navbar-light navbar-expand-md border rounded-0 shadow-sm" style="font-weight: bold;background: #ffffff;">
+        <div class="container-fluid"><a class="navbar-brand" href="{{ url_for('home') }}">Home</a><input class="border rounded-0 small bg-light form-control" type="search" id="search_bar" placeholder="Buscar..." style="transform: translateX(0px);width: 50%;"><button class="btn btn-primary" id="search_button" type="button"><i class="fa fa-search"></i></button><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse d-md-flex d-lg-flex d-xl-flex justify-content-md-end justify-content-lg-end justify-content-xl-end" id="navcol">
+                <ul class="navbar-nav d-xl-flex">
+                    <li class="nav-item">
+                        <div class="nav-item dropdown"><a class="dropdown-toggle d-xxl-flex justify-content-xxl-center align-items-xxl-center nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">{{ username }}</a>
+                            <div class="dropdown-menu" style="transform: translateX(-5px) translateY(8px);">
+                                <a class="dropdown-item" href="{{ url_for('profile') }}">Perfil</a>
+                                <a class="dropdown-item" href="{{ url_for('billing') }}">Compras</a>
+                                <a class="dropdown-item" href="{{ url_for('products') }}">Platos</a>
+                                <div style="background: rgba(137,137,137,0.25);border-style: none;height: 2px;width: 80%;margin-left: 16px;margin-top: 8px;margin-bottom: 8px;"></div>
+                                <a class="dropdown-item" href="{{ url_for('login') }}"">Cerrar sesión</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="max-width: 70%;margin-top: 36px;padding-bottom: 12px;padding-top: 12px;margin-bottom: 16px;">
+        <div style="margin: 8px;padding: 4px;">
+            <h4 style="margin-left: 8px;margin-top: 8px;margin-right: 8px;">{{ plato_pName }}</h4>
+        </div>
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 4px;background: rgba(32,201,151,0.3);margin-top: 12px;">
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;color: rgb(33, 37, 41);">Compra</h6>
+        </div>
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 4px;background: #ffffff;margin-top: 12px;">
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;color: rgba(32,201,151,0.9);font-size: 24px;font-weight: bold;">${{ plato_pPrice }}</h6>
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;color: rgb(33, 37, 41);">{{ plato_pDescription }}</h6>
+        </div>
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 4px;background: #ffffff;margin-top: 12px;">
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;color: rgb(33, 37, 41);">Calificaciones</h6>
+        </div>
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 4px;background: #ffffff;margin-top: 12px;">
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;color: rgba(255,193,7,0.8);font-size: 24px;font-weight: bold;">{{ calificaciones }}</h6>
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;color: rgb(33, 37, 41);">Calificaciones</h6>
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;color: rgba(255,193,7,0.8);font-size: 24px;font-weight: bold;">{{ calificaciones_promedio }}</h6>
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;color: rgb(33, 37, 41);">Estrellas promedio</h6>
+        </div>
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 4px;background: #ffffff;margin-top: 12px;">
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;color: rgb(33, 37, 41);">Comentarios</h6>
+        </div>
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 4px;background: #ffffff;margin-top: 12px;">
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;">Lo que otros piensan</h6>
+            <div style="margin: 8px;padding: 4px;">
+                <div class="table-responsive" id="table_product" style="max-width: 100%;font-size: 14px;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Autor</th>
+                                <th>Comentario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for comment in comments_jinja %}
+                            <tr>
+                                <td>{{ comment[4] }}</td> <!--Fecha-->
+                                <td>{{ comment[2] }}</td> <!--Autor-->
+                                <td>{{ comment[3] }}</td> <!--Comentario-->
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../static/assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

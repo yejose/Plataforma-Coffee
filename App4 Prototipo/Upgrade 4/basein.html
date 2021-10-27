@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>App4</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md border rounded-0 shadow-sm" style="font-weight: bold;background: 880E4F;">
+        <div class="container-fluid"><a class="navbar-brand" href="index-usuario.html">Home</a><input class="border rounded-0 small bg-light form-control" type="search" placeholder="Buscar..." style="transform: translateX(0px);width: 50%;"><button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse d-md-flex d-lg-flex d-xl-flex justify-content-md-end justify-content-lg-end justify-content-xl-end" id="navcol-1">
+                <ul class="navbar-nav d-xl-flex">
+                    <li class="nav-item"><a class="nav-link" href="carrito.html" style="color: rgba(0, 0, 0, 0.55);">Carrito</a></li>
+                    <li class="nav-item">
+                        <div class="nav-item dropdown"><a class="dropdown-toggle d-xxl-flex justify-content-xxl-center align-items-xxl-center nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Diana Petersen</a>
+                            <div class="dropdown-menu" style="transform: translateX(-5px) translateY(8px);"><a class="dropdown-item" href="perfil.html">Perfil</a><a class="dropdown-item" href="lista.html">Lista de deseos</a><a class="dropdown-item" href="compras.html">Compras</a><a class="dropdown-item" href="comentarios.html">Comentarios</a><a class="dropdown-item" href="platos.html">Platos</a><a class="dropdown-item" href="usuarios.html">Usuarios</a><a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                                <div style="background: rgba(137,137,137,0.25);border-style: none;height: 2px;width: 80%;margin-left: 16px;margin-top: 8px;margin-bottom: 8px;"></div><a class="dropdown-item" href="index.html">Cerrar sesión</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="margin-top: 2%;margin-left: 2%;margin-right: 2%;margin-bottom: 2%;padding-left: 12px;">
+        <div style="margin-bottom: 16px;">
+            <h1 style="font-size: 24px;font-weight: bold;">Agregar productos</h1>
+        </div>
+        <div>
+            <div class="row" style="margin: 0px;">
+                <div class="col d-xxl-flex justify-content-xxl-center" style="min-width: 250px;padding: 12px;max-width: 250px;width: 250px;">
+                    <form method="post" style="max-width: 90%;">
+                        <div class="mb-3" style="max-width: 100%;"><input class="form-control" type="text" id="css_pName" name="css_pName" placeholder="Nombre" style="font-size: 14px;max-width: 100%;">
+                            <p style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">Error</p>
+                        </div>
+                        <div class="mb-3"><input class="form-control" type="text" id="css_pDescription" name="css_pDescription" placeholder="Descripción" style="font-size: 14px;"></div>
+                        <div class="mb-3"><input class="form-control" type="text" id="css_pPrice" name="css_pPrice" placeholder="Precio" style="font-size: 14px;"></div>
+                        <div class="mb-3"><input class="form-control" type="text" id="css_pAmount" name="css_pAmount" placeholder="Cantidad" style="font-size: 14px;"></div><button class="btn btn-primary d-block w-100" type="submit" style="margin-bottom: 16px;min-width: 50%;max-width: 50%;font-size: 14px;">Agregar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>

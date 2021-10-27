@@ -1,0 +1,209 @@
+<form onsubmit="{{ url_for('productos') }}" id="formAdd" method="post" style="margin: 12px;max-width: 40%;margin-left: 16px;margin-top: 16px;">
+
+<button onclick="validarProductos()" class="btn btn-primary" id="add_product" type="button" style="margin-left: 0px;margin-bottom: 16px;margin-top: 8px;margin-right: 16px;" data-bs-target="#modal-1" data-bs-toggle="modal">Agregar</button>
+
+
+HECHO:
+Agregar campo Color en tabla Productos 
+Limitar campo de descripcion en gesitonar productos 
+Imprimir tabla jinja para vista Gestion de Usuarios 
+Imprimir tabla jinja cuando la tabla esta vacia + imprimir errores cuando la tabla esta vacia 
+Agregar botones de confirmacion
+Sistema de prevencion de Usuarios repetidos (Email)
+Hacer Nombre (usuario) editable
+Autogeneracion de contraseñas mejorado
+Reforzar seguridad Base de datos
+Sistema de prevencion de Productos repetidos (Nombre)
+Deteccion de numeros en Nombres de usuario (uName)
+
+POR HACER:
+Considerar validaciones para uProfile 
+Validar que nombres no tengan numeros
+Copiar validaciones para el lado del back-end en caso de que el Javascript no funcione
+Revisar metodo optimizado de deteccion de numeros en pNombre para Products
+
+@app.route('/products', methods=('GET', 'POST'))
+def products():
+    print("Entra a ruta")
+    if request.method == 'POST':
+        print("RECIBIO POST")
+
+        a = request.form
+        print(a)
+
+        if 'add_pName' in a.keys():
+            print("Ingresa formulario 1")
+
+            pName = request.form.get("add_pName")
+            pDescription = request.form.get("add_pDescription")
+            pPrice = request.form.get("add_pPrice")
+            pAmount = request.form.get("add_pAmount")
+            pColor = request.form.get("add_pColor")           
+
+            errors = False
+
+            # error_add_pName = ""
+            # error_add_pDescription = ""
+            # error_add_pPrice = ""
+            # error_add_pAmount = ""
+
+            # ###
+            # #EVALUAR ERRORES DE SINTAXIS EN ESTE BLOQUE
+            # if len(pName) == 0 or pName == None:
+            #     error_add_pName = "Ingrese un nombre"
+            #     errors = True
+            # elif len(pName) < 3:
+            #     error_add_pName = "Ingrese un nombre mas largo<br>"
+            #     errors = True
+            
+            # if len(pDescription) == 0 or pDescription == None:
+            #     error_add_pDescription = "Ingrese una descripcion"
+            #     errors = True
+            
+            # elif len(pDescription) <= 5:
+            #     error_add_pDescription = "Ingrese una descripcion mas larga"
+            #     errors = True
+
+            # elif len(pDescription) >= 100:
+            #     error_add_pDescription = "Ingrese una descripcion mas corta"
+            #     errors = True
+
+            # if len(pPrice) == 0 or pPrice == None or float(pPrice) == 0 or int(pPrice) == 0:
+            #     error_add_pDescription= "Ingrese un precio";    
+            #     errors = True
+
+            # if isinstance(pPrice, float) == False or float(pPrice) < 0 or int(pPrice) < 0:
+            #     error_add_pPrice = "El valor no es valido"
+            #     errors = True
+            # else:
+            #     pPrice = int(pPrice)
+            #     print(type(pPrice))
+
+            # if pAmount == 0 or len(pAmount) == 0 or pAmount == None:
+            #     error_add_pAmount = "Ingrese una cantidad"
+            #     errors = True
+
+            # elif isinstance(pAmount, int) == False:
+            #     error_add_pAmount = "El valor no es valido"
+            #     errors = True
+
+            # else:
+            #     pAmount = int(pAmount)
+            #     print(type(pAmount))
+
+            
+
+            # ###
+            # if errors == False:
+            #     error_add_pName = ""
+            #     error_add_pDescription = ""
+            #     error_add_pPrice = ""
+            #     error_add_pAmount = ""
+
+            comparar_pID = db.compararProductos(pName) #Booleano = No hay otro Producto igual
+            if isinstance(comparar_pID, bool) == True:
+                print("NO ENCONTRO PRODUCTOS IGUALES")
+
+                db.addProductos(pName, pDescription, pPrice, pAmount, pColor)
+                tabla = db.consultarTodosProductos()
+                if isinstance(tabla, bool) == False: #Tabla llena
+                    return render_template("products.html", variable_jinja=tabla)
+                elif tabla == False: #Valida si la tabla esta vacia
+                    return render_template("products.html")
+
+            elif isinstance(comparar_pID, bool) == False: #No Booleano = habia otro Producto igual
+                print("ENCONTRO OTRO PRODUCTO IGUAL")
+                tabla = db.consultarTodosProductos()
+                if isinstance(tabla, bool) == False: #Tabla llena
+                    return render_template("products.html", variable_jinja=tabla, error_add_pName="Un producto de nombre similar ya se encuentra registrado.")
+                elif tabla == False: #Valida si la tabla esta vacia
+                    return render_template("products.html")   
+            
+            # elif errors == True:
+            #     print("Hubieron errores en el formulario")               
+            
+            #     tabla = db.consultarTodosProductos()
+            #     return render_template("products.html", variable_jinja=tabla, error_add_pName=error_add_pName, error_add_pDescription=error_add_pDescription, error_add_pPrice=error_add_pPrice, error_add_pAmount=error_add_pAmount)
+
+        elif 'search_pID' in a.keys():
+                     
+            search_pID = request.form.get("search_pID")
+            resultado = db.consultarProductos(search_pID)
+
+            if resultado == False: #No encontro nada
+                print("No encontro la ID")
+                tabla = db.consultarTodosProductos()
+                if isinstance(tabla, bool) == False:
+                    return render_template("products.html", error_search_pID="No se encontro la ID.", variable_jinja=tabla)
+                elif tabla == False:
+                    return render_template("products.html", error_search_pID="No hay productos para buscar.")
+            else:
+                print("Encontro la ID")
+                tabla = db.consultarTodosProductos()         
+                return render_template("products.html", upgrade_pID=resultado[0][0], upgrade_pName=resultado[0][1], upgrade_pPrice=resultado[0][2], upgrade_pAmount=resultado[0][3], upgrade_pDescription=resultado[0][4], variable_jinja=tabla)
+
+        elif 'upgrade_pID' in a.keys():
+
+            upgrade_pID = request.form.get("upgrade_pID")
+            upgrade_pName = request.form.get("upgrade_pName")
+            upgrade_pDescription = request.form.get("upgrade_pDescription")
+            upgrade_pPrice = request.form.get("upgrade_pPrice")
+            upgrade_pAmount = request.form.get("upgrade_pAmount")
+            resultado = db.actualizarProductos(upgrade_pID, upgrade_pName, upgrade_pDescription, upgrade_pPrice, upgrade_pAmount)
+            tabla = db.consultarTodosProductos()
+            return render_template("products.html", variable_jinja=tabla, Confirmation="Producto actualizado.")
+
+        elif 'delete_pID' in a.keys():
+
+            delete_pID = request.form.get("delete_pID")
+            print("Entro boton Eliminar")
+            print(delete_pID)
+            resultado = db.deleteProductos(delete_pID)
+            if resultado == True:
+                tabla = db.consultarTodosProductos()
+                if isinstance(tabla, bool) == False:                    
+                    return render_template("products.html", variable_jinja=tabla, confirmation_delete="Producto eliminado.")
+                elif tabla == False:
+                    return render_template("products.html", confirmation_delete="Producto eliminado.")                  
+                    
+
+            elif resultado == False:
+                print("Entra al False")
+                tabla = db.consultarTodosProductos()
+                if isinstance(tabla, bool) == False:
+                    return render_template("products.html", variable_jinja=tabla, error_delete_pID="Producto no existente.")
+                elif tabla == False:
+                    return render_template("products.html", error_delete_pID="No hay productos para Eliminar.")
+            
+
+    elif request.method == 'GET':
+
+        tabla = db.consultarTodosProductos()
+        if isinstance(tabla, bool) == False:
+            return render_template("products.html", variable_jinja=tabla, error_add_pName="")
+        elif tabla == False:
+            return render_template("products.html", error_add_pName="")
+
+    return render_template("products.html")
+
+    {% for dict_item in productos_jinja %}
+                        {% set residuo = loop.length%3 %}
+                        {% if residuo > 0 %}
+                            {% set contador = (loop.length//3) +1 %}
+                            {{ contador }}            
+                        {% endif %}
+                    {% endfor %} 
+
+
+https://pythonbasics.org/flask-login/
+
+https://flask-bcrypt.readthedocs.io/en/latest/
+
+Consultar comentarios por medio de id producto, realizar funcion aparte
+
+
+home O
+products X
+users X
+login X
+signup X

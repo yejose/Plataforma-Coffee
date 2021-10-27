@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>App 4</title>
+    <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/assets/css/FontAwesome.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik&amp;display=swap">
+    <link rel="stylesheet" href="../static/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/assets/css/styles.css">
+</head>
+
+<body style="background: var(--bs-light);">
+    <nav class="navbar navbar-light navbar-expand-md border rounded-0 shadow-sm" style="font-weight: bold;background: #ffffff;">
+        <div class="container-fluid"><a class="navbar-brand" href="{{ url_for('home') }}">Home</a><input class="border rounded-0 small bg-light form-control" type="search" id="search_bar" placeholder="Buscar..." style="transform: translateX(0px);width: 50%;"><button class="btn btn-primary" id="search_button" type="button"><i class="fa fa-search"></i></button><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse d-md-flex d-lg-flex d-xl-flex justify-content-md-end justify-content-lg-end justify-content-xl-end" id="navcol">
+                <ul class="navbar-nav d-xl-flex">
+                    <li class="nav-item">
+                        <div class="nav-item dropdown"><a class="dropdown-toggle d-xxl-flex justify-content-xxl-center align-items-xxl-center nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">{{ username }}</a>
+                            <div class="dropdown-menu" style="transform: translateX(-5px) translateY(8px);">
+                                <a class="dropdown-item" href="{{ url_for('profile') }}">Perfil</a>
+                                <a class="dropdown-item" href="{{ url_for('billing') }}">Compras</a>
+                                <a class="dropdown-item" href="{{ url_for('products') }}">Platos</a>
+                                <div style="background: rgba(137,137,137,0.25);border-style: none;height: 2px;width: 80%;margin-left: 16px;margin-top: 8px;margin-bottom: 8px;"></div>
+                                <a class="dropdown-item" href="{{ url_for('login') }}">Cerrar sesión</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="max-width: 70%;margin-top: 36px;padding-bottom: 12px;padding-top: 12px;margin-bottom: 16px;">
+        <div style="margin: 8px;padding: 4px;">
+            <h4 style="margin-left: 8px;margin-top: 8px;margin-right: 8px;">Gestión de productos</h4>
+        </div>
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 4px;background: #ffffff;margin-top: 12px;">
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;">Agrega un producto</h6>
+            <form id="add_form" method="post" style="margin: 12px;max-width: 40%;margin-left: 16px;margin-top: 16px;" action="/products">
+                <div class="mb-3">
+                    <input class="form-control" type="text" id="add_pName" name="add_pName" placeholder="Nombre" style="font-size: 14px;">
+                    <p id="error_add_pName" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">{{ error_add_pName }}</p>
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" id="add_pDescription" name="add_pDescription" placeholder="Descripción" style="font-size: 14px;"></textarea>
+                    <p id="error_add_pDescription" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">{{ error_add_pDescription }}</p>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="text" id="add_pPrice" name="add_pPrice" placeholder="Precio" style="font-size: 14px;">
+                    <p id="error_add_pPrice" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">{{ error_add_pPrice }}</p>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="text" id="add_pAmount" name="add_pAmount" placeholder="Cantidad" style="font-size: 14px;">
+                    <p id="error_add_pAmount" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">{{ error_add_pAmount }}</p>
+                </div>
+                <div class="d-xxl-flex align-items-xxl-center mb-3">
+                    <!-- <input class="form-control form-control-color" type="color" id="add_pColor" style="margin-right: 4px;"> -->
+                    <input class="form-control form-control-color" type="color" id="add_pColor" name="add_pColor" style="margin-right: 4px;">
+                    <p style="font-size: 14px;margin-bottom: 4px;margin-left: 8px;color: rgba(33,37,41,0.7);margin-top: 4px;">Selecciona un color representativo del producto.</p>
+                </div>
+                
+                <button onclick="validarProductos();" class="btn btn-primary" id="search_product" type="button" style="margin-top: 8px;margin-bottom: 16px;margin-right: 16px;">Agregar</button>
+                <!-- <button onclick="validarProductos();" class="btn btn-primary" id="add_product" type="button" style="margin-left: 0px;margin-bottom: 16px;margin-top: 8px;margin-right: 16px;">Agregar</button> -->
+                <!-- data-bs-target="#modal-1" data-bs-toggle="modal" -->
+            </form>
+        </div>
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 4px;background: #ffffff;margin-top: 12px;">
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;color: rgb(33, 37, 41);">Actualiza productos</h6>
+
+            <form action="/products" id="search_form" method="post" style="margin: 12px;max-width: 40%;margin-left: 16px;margin-top: 16px;">
+                <div class="mb-3">
+                    <input class="form-control" type="text" id="search_pID" name="search_pID" placeholder="Ingresa ID" style="font-size: 14px;max-width: 120px;">
+                    <p id="error_search_pID" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 5px; margin-top: 5px;">{{ error_search_pID }}</p>
+                </div>                    
+                <button onclick="validarBusqueda();" class="btn btn-primary" id="search_product" type="button" style="margin-top: 8px;margin-bottom: 16px;margin-right: 16px;">Buscar</button>
+                <div style="background: rgba(33,37,41,0.1);height: 2px;margin-bottom: 32px;margin-top: 8px;"></div>
+            </form>
+            
+            <form id="upgrade_form" method="post" style="margin: 12px;max-width: 40%;margin-left: 16px;margin-top: 16px;" action="/products">
+                <div class="mb-3"></div>
+                <div class="mb-3">
+                    <p style="font-size: 14px;margin-bottom: 4px;max-width: 100%;margin-left: 8px;color: rgba(33,37,41,0.7);">ID</p>
+                    <input class="form-control" type="text" id="upgrade_pID" name="upgrade_pID" style="font-size: 14px;" readOnly="" value="{{ upgrade_pID }}">
+                </div>
+                <div class="mb-3">
+                    <p style="font-size: 14px;margin-bottom: 4px;max-width: 100%;margin-left: 8px;color: rgba(33,37,41,0.7);">Nombre</p>
+                    <input class="form-control" type="text" id="upgrade_pName" name="upgrade_pName" style="font-size: 14px;" value="{{ upgrade_pName  }}" readonly="">
+                    <p id="error_upgrade_pName" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;"></p>
+                </div>
+                <div class="mb-3">
+                    <p style="font-size: 14px;margin-bottom: 4px;max-width: 100%;margin-left: 8px;color: rgba(33,37,41,0.7);">Descripción</p>
+                    <textarea class="form-control" id="upgrade_pDescription" name="upgrade_pDescription" style="font-size: 14px;"textarea>{{ upgrade_pDescription  }}</textarea>
+                    <p id="error_upgrade_pDescription" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;"></p>
+                </div>
+                <div class="mb-3">
+                    <p style="font-size: 14px;margin-bottom: 4px;max-width: 100%;margin-left: 8px;color: rgba(33,37,41,0.7);">Precio</p>
+                    <input class="form-control" type="text" id="upgrade_pPrice" name="upgrade_pPrice" style="font-size: 14px;" value="{{ upgrade_pPrice  }}">
+                    <p id="error_upgrade_pPrice" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;"></p>
+                </div>
+                <div class="mb-3">
+                    <p style="font-size: 14px;margin-bottom: 4px;max-width: 100%;margin-left: 8px;color: rgba(33,37,41,0.7);">Cantidad</p>
+                    <input class="form-control" type="text" id="upgrade_pAmount" name="upgrade_pAmount" style="font-size: 14px;" value="{{ upgrade_pAmount }}">
+                    <p id="error_upgrade_pAmount" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;"></p>
+                </div>
+                <button onclick="validarActualizar()" class="btn btn-primary" id="upgrade_product" type="button" style="margin-bottom: 16px;margin-top: 8px;margin-right: 16px;">Actualizar</button>
+                <p id="confirmation_upgrade" style="font-size: 12px;color: var(--bs-teal);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">{{ Confirmation }}</p>
+            </form>
+
+        </div>
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 4px;background: #ffffff;margin-top: 12px;">
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;color: rgb(33, 37, 41);">Eliminar productos</h6>
+
+            <form id="delete_form" method="post" style="margin: 12px;max-width: 40%;margin-left: 16px;margin-top: 16px;" action="/products">
+                <div class="mb-3">
+                    <input class="form-control" type="text" id="delete_pID" name="delete_pID" placeholder="Ingresa ID" style="font-size: 14px;max-width: 120px;">
+                    <p id="error_delete_pID" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">{{ error_delete_pID }}</p>                
+                </div>
+                <button onclick="validarDelete()" class="btn btn-primary" id="delete_product" type="button" style="margin-top: 8px;margin-bottom: 16px;margin-right: 16px;background: var(--bs-red);border-style: none;">Eliminar</button>
+                <p id="confirmation_delete" style="font-size: 12px;color: var(--bs-teal);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">{{ confirmation_delete }}</p>
+            </form>
+
+        </div>
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 4px;background: #ffffff;margin-top: 12px;">
+            <h6 style="margin: 8px;margin-left: 8px;margin-top: 8px;margin-right: 8px;margin-bottom: 8px;padding: 8px;">Lista de productos</h6>
+            <div style="margin: 8px;padding: 4px;">
+                <div class="table-responsive" id="table_product" style="max-width: 100%;font-size: 14px;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>ID</th>
+                                <th>Producto</th>
+                                <th>Descripción</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dict_item in variable_jinja %}
+
+                            <tr>                                                                     
+                                <td>{{ dict_item[6] }}</td><!--Fecha-->
+                                <td>{{ dict_item[0] }}</td><!--ID-->
+                                <td>{{ dict_item[1] }}</td><!--Name-->
+                                <td>{{ dict_item[4] }}</td><!--Descripcion-->
+                                <td>${{ dict_item[2] }}</td><!--Precio-->
+                                <td>{{ dict_item[3] }}</td><!--Cantidad-->
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../static/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/assets/js/validarProductos.js"></script>
+</body>
+
+</html>

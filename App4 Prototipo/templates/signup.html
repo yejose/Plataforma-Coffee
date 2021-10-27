@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>App 4</title>
+    <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/assets/css/FontAwesome.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik&amp;display=swap">
+    <link rel="stylesheet" href="../static/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/assets/css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md border rounded-0 shadow-sm" style="font-weight: bold;background: 880E4F;">
+        <div class="container-fluid"><a class="navbar-brand" href="baselog.html" style="margin: auto;">Home</a></div>
+    </nav>
+    <div class="container d-xl-flex justify-content-xl-center" style="margin-top: 36px;padding-bottom: 12px;padding-top: 12px;margin-bottom: 16px;">
+        <div class="border rounded shadow-sm" style="margin: 8px;padding: 30px;background: #ffffff;margin-top: 12px;min-width: 50%;">
+            <h4 style="margin-left: 8px;margin-top: 8px;margin-right: 8px;text-align: center;margin-bottom: 24px;">Regístrate</h4>
+            <form id="signup_form" method="post" style="margin: 12px;margin-left: 16px;margin-top: 16px;" action="/signup">
+                <div class="mb-3">
+                    <input class="form-control" type="text" id="signup_uName" name="signup_uName" placeholder="Nombre" style="font-size: 14px;">
+                    <p id="error_signup_uName" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;"></p>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="text" id="signup_uLastname" name="signup_uLastname" placeholder="Apellido" style="font-size: 14px;">
+                    <p id="error_signup_uLastname" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;"></p>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="text" id="signup_uEmail" name="signup_uEmail" placeholder="Email" style="font-size: 14px;">
+                    <p id="error_signup_uEmail" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">{{ error_signup_uEmail }}</p>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="text" id="signup_uPhone" name="signup_uPhone" placeholder="Celular" style="font-size: 14px;color: rgb(33, 37, 41);">
+                    <p id="error_signup_uPhone" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;"></p>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="password" id="signup_uPassword" name="signup_uPassword" placeholder="Contraseña" style="font-size: 14px;color: rgb(33, 37, 41);">
+                    <p id="error_signup_uPassword" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;"></p>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="password" id="signup_uPassword2" name="signup_uPassword2" placeholder="Repite la contraseña" style="font-size: 14px;color: rgb(33, 37, 41);">
+                    <p id="error_signup_uPassword2" style="font-size: 12px;color: var(--bs-red);margin-bottom: 0px;max-width: 100%;margin-left: 8px;"></p>
+                </div>
+                <button onclick="validar_Registro();" class="btn btn-primary" id="signup_users" type="button" style="margin-left: 0px;margin-bottom: 16px;margin-top: 8px;margin-right: 16px;">Registrar</button>
+                <a href="{{ url_for('login') }}" id="login_link" style="font-size: 12px;color: var(--bs-teal);margin-bottom: 0px;max-width: 100%;margin-left: 8px;">Si tienes usuario, inicia sesión.</a>
+                </a>
+            </form>
+        </div>
+    </div>
+    <!-- <script src="../static/assets/bootstrap/js/bootstrap.min.js"></script> -->
+    <!-- <script src="../static/assets/js/"></script> -->
+    <script src="../static/assets/js/validarRegistro.js"></script>
+</body>
+
+</html>
